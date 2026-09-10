@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Free Robux</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@600;700;900&family=Source+Code+Pro:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            font-family: 'Gothic A1', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #0d0e10;
+            color: #ffffff;
+        }
+
+        /* 重ね合わせ背景 */
+        .bg-layer-2 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://files.catbox.moe/9mo5ri.jpg') center/cover no-repeat;
+            z-index: 1;
+        }
+
+        .bg-layer-1 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://files.catbox.moe/aq7956.png') center/cover no-repeat;
+            z-index: 2;
+            opacity: 0.8;
+        }
+
+        /* メインコンテナ */
+        .app-container {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 16px;
+        }
+
+        /* Roblox カードデザイン */
+        .roblox-card {
+            background: #191B1D;
+            border: 1px solid #393B3D;
+            border-radius: 12px;
+            padding: 28px 24px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 26px;
+            font-weight: 900;
+            margin-bottom: 24px;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+        }
+
+        /* 入力フォーム */
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 8px;
+            color: #BDC3C7;
+            font-weight: 700;
+        }
+
+        .roblox-input {
+            width: 100%;
+            height: 44px;
+            padding: 0 14px;
+            background: #232527;
+            border: 1px solid #393B3D;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.15s ease;
+        }
+
+        .roblox-input:focus {
+            border-color: #00A2FF;
+        }
+
+        .roblox-input.invalid {
+            border-color: #ff3b30;
+        }
+
+        .input-error-msg {
+            color: #ff4d4d;
+            font-size: 12px;
+            font-weight: 700;
+            margin-top: 6px;
+            min-height: 16px;
+            display: none;
+        }
+
+        .input-error-msg.visible {
+            display: block;
+        }
+
+        /* Robux 選択グリッド */
+        .robux-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .robux-option {
+            background: #232527;
+            border: 1px solid #393B3D;
+            border-radius: 8px;
+            padding: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.15s ease;
+        }
+
+        .robux-option:hover {
+            background: #2B2D30;
+            border-color: #55585C;
+        }
+
+        .robux-option.selected {
+            border: 2px solid #00E676;
+            background: rgba(0, 230, 118, 0.08);
+        }
+
+        .robux-option input[type="radio"] {
+            display: none;
+        }
+
+        .robux-icon {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+
+        .robux-amount {
+            font-size: 17px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .btn-submit {
+            width: 100%;
+            height: 48px;
+            background: #00B259;
+            border: none;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.15s ease, transform 0.1s ease;
+        }
+
+        .btn-submit:hover {
+            background: #00C864;
+        }
+
+        .btn-submit:active {
+            transform: scale(0.98);
+        }
+
+        /* ローディング画面 */
+        .profile-preview {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            margin-bottom: 20px;
+        }
+
+        .display-name {
+            font-size: 22px;
+            font-weight: 900;
+            color: #ffffff;
+        }
+
+        .username-tag {
+            font-size: 14px;
+            color: #8B93A7;
+            font-weight: 700;
+        }
+
+        .progress-box {
+            width: 100%;
+            background: #232527;
+            border-radius: 6px;
+            height: 12px;
+            overflow: hidden;
+            margin: 14px 0;
+            border: 1px solid #393B3D;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: #00B259;
+            transition: width 0.15s ease-out;
+        }
+
+        .status-text {
+            font-size: 13px;
+            color: #00A2FF;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .terminal-logs {
+            width: 100%;
+            height: 140px;
+            background: #111214;
+            border: 1px solid #2B2D30;
+            border-radius: 8px;
+            padding: 10px;
+            font-family: 'Source Code Pro', monospace;
+            font-size: 13px;
+            color: #00FF66;
+            text-align: left;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+            line-height: 1.4;
+        }
+
+        /* トロール画面 */
+        #troll-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000000;
+            z-index: 9999;
+            display: none;
+        }
+
+        #troll-video {
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            display: block;
+        }
+
+        .troll-popup {
+            position: absolute;
+            bottom: -100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 92%;
+            max-width: 440px;
+            max-height: 85vh;
+            overflow-y: auto;
+            background: #191B1D;
+            border: 1px solid #ff3b30;
+            border-bottom: none;
+            border-radius: 16px 16px 0 0;
+            padding: 24px;
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.8);
+            transition: bottom 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            text-align: center;
+        }
+
+        .troll-popup.active {
+            bottom: 0;
+        }
+
+        .troll-title {
+            font-size: 20px;
+            color: #ff3b30;
+            font-weight: 900;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .troll-desc {
+            font-size: 14px;
+            color: #BDC3C7;
+            margin-bottom: 16px;
+        }
+
+        .sns-grid {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 16px 0;
+        }
+
+        .sns-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.15s ease;
+        }
+
+        .sns-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .sns-btn svg {
+            width: 26px;
+            height: 26px;
+        }
+
+        .btn-line { background: #06C755; }
+        .btn-x { background: #000000; border: 1px solid #393B3D; }
+        .btn-tiktok { background: #000000; border: 1px solid #393B3D; }
+        .btn-message { background: #34C759; }
+        .btn-email { background: #007AFF; }
+        .btn-share { background: #3A3A3C; }
+
+        .btn-copy {
+            width: 100%;
+            height: 42px;
+            background: #232527;
+            border: 1px solid #393B3D;
+            border-radius: 8px;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background 0.15s;
+        }
+
+        .btn-copy:hover {
+            background: #2B2D30;
+        }
+
+        .dev-message-box {
+            margin-top: 18px;
+            padding: 14px;
+            background: #232527;
+            border: 1px dashed #ff3b30;
+            border-radius: 8px;
+            text-align: left;
+        }
+
+        .dev-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #ff5252;
+            margin-bottom: 6px;
+        }
+
+        .dev-content {
+            font-size: 12px;
+            color: #d1d5e0;
+            line-height: 1.5;
+        }
+
+        .dev-content b {
+            color: #00E676;
+        }
+
+        .victim-counter {
+            margin-top: 16px;
+            font-size: 13px;
+            color: #8B93A7;
+        }
+
+        .counter-num {
+            font-weight: bold;
+            color: #ff3b30;
+            font-size: 17px;
+            font-family: 'Source Code Pro', monospace;
+        }
+
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <div class="bg-layer-2"></div>
+    <div class="bg-layer-1"></div>
+
+    <div class="app-container">
+
+        <!-- フォーム画面 -->
+        <div id="step-form" class="roblox-card">
+            <h1 class="card-title" id="i18n-card-title">Free Robux Generator</h1>
+            <form id="robux-form" onsubmit="event.preventDefault(); validateAndStart();">
+                
+                <div class="input-group">
+                    <label class="input-label" for="username" id="i18n-label-username">Roblox ユーザーネーム</label>
+                    <input type="text" id="username" class="roblox-input" placeholder="ユーザーネームを入力" autocomplete="off" maxlength="20">
+                    <div id="username-error" class="input-error-msg"></div>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label" id="i18n-label-amount">Robuxの数量を選択</label>
+                    <div class="robux-grid">
+                        <label class="robux-option selected">
+                            <input type="radio" name="amount" value="100" checked onclick="selectOption(this)">
+                            <img src="https://files.catbox.moe/as7owc.webp" class="robux-icon" alt="Robux">
+                            <span class="robux-amount">100</span>
+                        </label>
+                        <label class="robux-option">
+                            <input type="radio" name="amount" value="500" onclick="selectOption(this)">
+                            <img src="https://files.catbox.moe/as7owc.webp" class="robux-icon" alt="Robux">
+                            <span class="robux-amount">500</span>
+                        </label>
+                        <label class="robux-option">
+                            <input type="radio" name="amount" value="1000" onclick="selectOption(this)">
+                            <img src="https://files.catbox.moe/as7owc.webp" class="robux-icon" alt="Robux">
+                            <span class="robux-amount">1,000</span>
+                        </label>
+                        <label class="robux-option">
+                            <input type="radio" name="amount" value="1500" onclick="selectOption(this)">
+                            <img src="https://files.catbox.moe/as7owc.webp" class="robux-icon" alt="Robux">
+                            <span class="robux-amount">1,500</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit" id="i18n-btn-submit">Robuxを取得する</button>
+            </form>
+        </div>
+
+        <!-- ローディング画面 -->
+        <div id="step-loading" class="roblox-card hidden">
+            <div class="profile-preview">
+                <div id="user-displayname" class="display-name">Loading...</div>
+                <div id="user-tag" class="username-tag">@username</div>
+            </div>
+
+            <div class="status-text" id="status-text">Roblox サーバーへ接続中... (0%)</div>
+
+            <div class="progress-box">
+                <div id="progress-bar" class="progress-bar"></div>
+            </div>
+
+            <div id="terminal" class="terminal-logs"></div>
+        </div>
+
+    </div>
+
+    <!-- トロール画面 -->
+    <div id="troll-screen">
+        <video id="troll-video" src="troll.mp4" loop playsinline preload="auto"></video>
+        
+        <div id="troll-popup" class="troll-popup">
+            <h2 class="troll-title" id="i18n-troll-title">残念でした！現実世界に、無限にお金が手に入るような「うまい話」なんて存在しないんだよ。はは☆</h2>
+            <p class="troll-desc" id="i18n-troll-desc">友達にも教えてあげよう！</p>
+            
+            <div class="sns-grid">
+                <button class="sns-btn btn-line" onclick="shareTo('line')" title="LINE">
+                    <svg viewBox="0 0 24 24" fill="#FFFFFF">
+                        <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.91c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M12 2C6.477 2 2 5.795 2 10.47c0 4.183 3.54 7.681 8.326 8.349.324.07.766.216.878.496.101.252.066.646.033.902l-.143.864c-.044.259-.208 1.013.888.553 1.097-.46 5.924-3.488 8.082-5.976C21.464 13.987 22 12.3 22 10.47 22 5.795 17.523 2 12 2"/>
+                    </svg>
+                </button>
+                <button class="sns-btn btn-x" onclick="shareTo('x')" title="X">
+                    <svg viewBox="0 0 24 24" fill="#FFFFFF">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </button>
+                <button class="sns-btn btn-tiktok" onclick="shareTo('tiktok')" title="TikTok">
+                    <svg viewBox="0 0 32 32" width="28" height="28">
+                        <g transform="translate(1, 0)">
+                            <path fill="#25F4EE" d="M16.8 5.2a4.8 4.8 0 0 0 3.8 1.8V10a8.2 8.2 0 0 1-3.8-1.1V18a6.5 6.5 0 1 1-6.5-6.5c.3 0 .7 0 1 .1v3.3a3.2 3.2 0 1 0 2.3 3.1V2h3.2v3.2z" transform="translate(-1.2, 0.8)"/>
+                            <path fill="#FE2C55" d="M16.8 5.2a4.8 4.8 0 0 0 3.8 1.8V10a8.2 8.2 0 0 1-3.8-1.1V18a6.5 6.5 0 1 1-6.5-6.5c.3 0 .7 0 1 .1v3.3a3.2 3.2 0 1 0 2.3 3.1V2h3.2v3.2z" transform="translate(1.2, -0.8)"/>
+                            <path fill="#FFFFFF" d="M16.8 5.2a4.8 4.8 0 0 0 3.8 1.8V10a8.2 8.2 0 0 1-3.8-1.1V18a6.5 6.5 0 1 1-6.5-6.5c.3 0 .7 0 1 .1v3.3a3.2 3.2 0 1 0 2.3 3.1V2h3.2v3.2z"/>
+                        </g>
+                    </svg>
+                </button>
+                <button class="sns-btn btn-message" onclick="shareTo('message')" title="Message">
+                    <svg viewBox="0 0 24 24" fill="#FFFFFF">
+                        <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+                    </svg>
+                </button>
+                <button class="sns-btn btn-email" onclick="shareTo('email')" title="Email">
+                    <svg viewBox="0 0 24 24" fill="#FFFFFF">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                </button>
+                <button class="sns-btn btn-share" onclick="shareTo('share')" title="Share">
+                    <svg viewBox="0 0 24 24" fill="#FFFFFF">
+                        <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                    </svg>
+                </button>
+            </div>
+
+            <button class="btn-copy" id="i18n-btn-copy" onclick="copyShareText()">メッセージテキストをコピー</button>
+
+            <div class="dev-message-box">
+                <div class="dev-title" id="i18n-dev-title">📢 開発者からのヒント</div>
+                <div class="dev-content" id="i18n-dev-content">
+                    自分の動画のコメント欄で<b>「まじでロバもらえた！」</b><b>「嘘かと思ったら本当に届いたww」</b>のようにサクラコメント・自作自演をしておくと、見た人が信用してさらに引っかかりやすくなります！ (お礼にフォローしている人に寄付企画したりします)
+                </div>
+            </div>
+
+            <div class="victim-counter">
+                <span id="i18n-victim-label">これまでに引っかかった人数:</span> <span id="counter-val" class="counter-num">0</span> <span id="i18n-victim-unit">人</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* 設定パラメーター */
+        const CONFIG = {
+            revealDelaySeconds: 3, 
+            finishBufferDelayMs: 1200,
+            apiNamespace: "freerobux_troll_roblox_app",
+            apiKey: "victim_count_v3",
+            terminalPrefix: "Launching tunaos..." // ターミナルのスピナー部分に表示される文字（自由に変更可）
+        };
+
+        /* 多言語辞書 (日本語 / 英語) */
+        const TRANSLATIONS = {
+            ja: {
+                cardTitle: "Free Robux Generator",
+                labelUsername: "Roblox ユーザーネーム",
+                placeholderUsername: "ユーザーネームを入力",
+                labelAmount: "Robuxの数量を選択",
+                btnSubmit: "Robuxを取得する",
+                statusConnecting: "Roblox サーバーへ接続中...",
+                statusGenerating: "Robux パケット生成中...",
+                statusTransferring: "アカウントへの転送処理中...",
+                statusComplete: "生成完了！Robuxの準備が整いました (100%)",
+                trollTitle: "残念でした！現実世界に、無限にお金が手に入るような「うまい話」なんて存在しないんだよ。はは☆",
+                trollDesc: "友達にも教えてあげよう！",
+                btnCopy: "メッセージテキストをコピー",
+                devTitle: "📢 開発者からのヒント",
+                devContent: "自分の動画のコメント欄で<b>「まじで1000ロバもらえた！」</b><b>「嘘かと思ったら本当に届いたww」</b>のようにサクラコメント・自作自演をしておくと、見た人が信用してさらに引っかかりやすくなります！",
+                victimLabel: "これまでに引っかかった人数:",
+                victimUnit: "人",
+                shareMessage: "ねえねえ知ってた?ここでガチで無料でロバもらえたよ",
+                textCopied: "メッセージとURLをコピーしました！",
+                errEmpty: "ユーザーネームを入力してください。",
+                errShort: "ユーザーネームは3文字以上で入力してください。",
+                errStartUnderscore: "先頭に『_』を使用することはできません。",
+                errEndUnderscore: "末尾に『_』を使用することはできません。",
+                errMultiUnderscore: "『_』は1つまでしか使用できません。"
+            },
+            en: {
+                cardTitle: "Free Robux Generator",
+                labelUsername: "Roblox Username",
+                placeholderUsername: "Enter Username",
+                labelAmount: "Select Robux Amount",
+                btnSubmit: "Get Free Robux",
+                statusConnecting: "Connecting to Roblox Server...",
+                statusGenerating: "Generating Robux Packets...",
+                statusTransferring: "Transferring to Account...",
+                statusComplete: "Complete! Your Robux is ready (100%)",
+                trollTitle: "You fell for it hook, line, and sinker! In the real world, there’s no such thing as a sweet deal where you can get infinite money. Haha☆",
+                trollDesc: "Prank your friends too!",
+                btnCopy: "Copy Share Message",
+                devTitle: "📢 Creator Tip",
+                devContent: "Leave fake comments like <b>'OMG I actually got 1500 Robux!'</b> in your video comment section so people will fall for it even more!",
+                victimLabel: "Total People Trolled:",
+                victimUnit: "",
+                shareMessage: "Hey! Did you know? You can actually get free Robux here!",
+                textCopied: "Copied message and URL to clipboard!",
+                errEmpty: "Please enter a username.",
+                errShort: "Username must be at least 3 characters.",
+                errStartUnderscore: "Username cannot start with '_'.",
+                errEndUnderscore: "Username cannot end with '_'.",
+                errMultiUnderscore: "Only one '_' is allowed."
+            }
+        };
+
+        let currentLang = 'ja';
+        let logInterval;
+        let spinnerInterval;
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            // URLハッシュ または IPから言語を設定
+            await initLanguage();
+
+            // URLのハッシュ（#en / #jp など）が書き換わった時に即座に言語を切り替える
+            window.addEventListener('hashchange', () => {
+                checkAndApplyHashLang();
+            });
+            
+            const usernameInput = document.getElementById('username');
+            usernameInput.addEventListener('input', (e) => {
+                let val = e.target.value;
+                val = val.replace(/[^a-zA-Z0-9_]/g, '');
+
+                const underscoreMatches = val.match(/_/g);
+                if (underscoreMatches && underscoreMatches.length > 1) {
+                    let firstIdx = val.indexOf('_');
+                    val = val.slice(0, firstIdx + 1) + val.slice(firstIdx + 1).replace(/_/g, '');
+                }
+
+                e.target.value = val;
+                clearError();
+            });
+
+            // 初期表示 & カウンター同期
+            setLocalCount(0);
+            initRealtimeCounter();
+        });
+
+        /* 言語判定・切替ロジック (URLハッシュ > IP/ブラウザ言語) */
+        async function initLanguage() {
+            if (!checkAndApplyHashLang()) {
+                await detectLanguageByIP();
+            }
+        }
+
+        function checkAndApplyHashLang() {
+            const hash = window.location.hash.toLowerCase();
+            if (hash === '#en') {
+                currentLang = 'en';
+                applyLanguage();
+                return true;
+            } else if (hash === '#jp' || hash === '#ja') {
+                currentLang = 'ja';
+                applyLanguage();
+                return true;
+            }
+            return false;
+        }
+
+        async function detectLanguageByIP() {
+            try {
+                const res = await fetch('https://ipapi.co/json/');
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.country_code && data.country_code !== 'JP') {
+                        currentLang = 'en';
+                    } else {
+                        currentLang = 'ja';
+                    }
+                } else {
+                    fallbackLanguage();
+                }
+            } catch (e) {
+                fallbackLanguage();
+            }
+            applyLanguage();
+        }
+
+        function fallbackLanguage() {
+            const userLang = navigator.language || navigator.userLanguage || '';
+            if (userLang.indexOf('ja') === -1) {
+                currentLang = 'en';
+            } else {
+                currentLang = 'ja';
+            }
+        }
+
+        function applyLanguage() {
+            const t = TRANSLATIONS[currentLang];
+            document.getElementById('i18n-card-title').innerText = t.cardTitle;
+            document.getElementById('i18n-label-username').innerText = t.labelUsername;
+            document.getElementById('username').placeholder = t.placeholderUsername;
+            document.getElementById('i18n-label-amount').innerText = t.labelAmount;
+            document.getElementById('i18n-btn-submit').innerText = t.btnSubmit;
+            
+            document.getElementById('i18n-troll-title').innerText = t.trollTitle;
+            document.getElementById('i18n-troll-desc').innerText = t.trollDesc;
+            document.getElementById('i18n-btn-copy').innerText = t.btnCopy;
+            document.getElementById('i18n-dev-title').innerText = t.devTitle;
+            document.getElementById('i18n-dev-content').innerHTML = t.devContent;
+            document.getElementById('i18n-victim-label').innerText = t.victimLabel;
+            document.getElementById('i18n-victim-unit').innerText = t.victimUnit;
+        }
+
+        function showError(message) {
+            const errorEl = document.getElementById('username-error');
+            const inputEl = document.getElementById('username');
+            errorEl.innerText = message;
+            errorEl.classList.add('visible');
+            inputEl.classList.add('invalid');
+        }
+
+        function clearError() {
+            const errorEl = document.getElementById('username-error');
+            const inputEl = document.getElementById('username');
+            errorEl.innerText = '';
+            errorEl.classList.remove('visible');
+            inputEl.classList.remove('invalid');
+        }
+
+        function validateRobloxUsername(val) {
+            const t = TRANSLATIONS[currentLang];
+            if (!val || val.length === 0) return t.errEmpty;
+            if (val.length < 3) return t.errShort;
+            if (val.startsWith('_')) return t.errStartUnderscore;
+            if (val.endsWith('_')) return t.errEndUnderscore;
+            const underscoreCount = (val.match(/_/g) || []).length;
+            if (underscoreCount > 1) return t.errMultiUnderscore;
+            return null;
+        }
+
+        function selectOption(el) {
+            document.querySelectorAll('.robux-option').forEach(opt => opt.classList.remove('selected'));
+            el.closest('.robux-option').classList.add('selected');
+        }
+
+        function validateAndStart() {
+            const usernameInput = document.getElementById('username').value.trim();
+            const errorMsg = validateRobloxUsername(usernameInput);
+
+            if (errorMsg) {
+                showError(errorMsg);
+                return;
+            }
+
+            clearError();
+            startProcess(usernameInput);
+        }
+
+        async function startProcess(usernameInput) {
+            const video = document.getElementById('troll-video');
+            
+            video.load();
+            try {
+                video.muted = true;
+                await video.play();
+                video.pause();
+                video.currentTime = 0;
+            } catch (e) {}
+
+            document.getElementById('step-form').classList.add('hidden');
+            document.getElementById('step-loading').classList.remove('hidden');
+
+            document.getElementById('user-tag').innerText = `@${usernameInput}`;
+            document.getElementById('user-displayname').innerText = usernameInput;
+
+            fetchRobloxUserData(usernameInput);
+            runTwoPhaseProgress();
+        }
+
+        /* 2段階のプログレス制御
+           Phase 1: 15秒 (0% -> 10%) 設定したPrefix (tuna等) スピナー回転
+           Phase 2: 30秒 (10% -> 100%) ランダムログ・プログレス進行
+        */
+        function runTwoPhaseProgress() {
+            const progressBar = document.getElementById('progress-bar');
+            const statusText = document.getElementById('status-text');
+            const terminal = document.getElementById('terminal');
+            const t = TRANSLATIONS[currentLang];
+
+            const phase1Time = 15000;
+            const phase2Time = 30000;
+            const phase1StartTime = Date.now();
+
+            const spinnerFrames = ['|', '/', '-', '\\'];
+            let spinnerIdx = 0;
+
+            spinnerInterval = setInterval(() => {
+                terminal.innerText = `${CONFIG.terminalPrefix} ${spinnerFrames[spinnerIdx]}`;
+                spinnerIdx = (spinnerIdx + 1) % spinnerFrames.length;
+            }, 120);
+
+            let phase2Started = false;
+            let currentProgress = 0;
+            let phase2StartTime = 0;
+
+            function update() {
+                const now = Date.now();
+
+                if (!phase2Started) {
+                    const elapsedP1 = now - phase1StartTime;
+                    if (elapsedP1 <= phase1Time) {
+                        currentProgress = (elapsedP1 / phase1Time) * 10;
+                        progressBar.style.width = `${currentProgress.toFixed(1)}%`;
+                        statusText.innerText = `${t.statusConnecting} (${Math.floor(currentProgress)}%)`;
+                    } else {
+                        phase2Started = true;
+                        phase2StartTime = now;
+                        clearInterval(spinnerInterval);
+                        terminal.innerText = "";
+                        startFastTerminalLogs();
+                    }
+                }
+
+                if (phase2Started) {
+                    const elapsedP2 = now - phase2StartTime;
+                    const remainingTime = phase2Time - elapsedP2;
+
+                    if (remainingTime > 0) {
+                        const targetRemainingProgress = 100 - currentProgress;
+                        const baseSpeed = targetRemainingProgress / remainingTime;
+                        
+                        const rand = Math.random();
+                        let multiplier = 1.0;
+
+                        if (rand < 0.20) {
+                            multiplier = Math.random() * 0.15;
+                        } else if (rand > 0.82) {
+                            multiplier = 2.5 + Math.random() * 1.5;
+                        } else {
+                            multiplier = 0.6 + Math.random() * 0.8;
+                        }
+
+                        currentProgress += baseSpeed * 16 * multiplier;
+                        if (currentProgress > 99.8) currentProgress = 99.8;
+
+                        progressBar.style.width = `${currentProgress.toFixed(1)}%`;
+
+                        if (currentProgress < 45) {
+                            statusText.innerText = `${t.statusConnecting} (${Math.floor(currentProgress)}%)`;
+                        } else if (currentProgress < 80) {
+                            statusText.innerText = `${t.statusGenerating} (${Math.floor(currentProgress)}%)`;
+                        } else {
+                            statusText.innerText = `${t.statusTransferring} (${Math.floor(currentProgress)}%)`;
+                        }
+                    } else {
+                        progressBar.style.width = '100%';
+                        statusText.innerText = t.statusComplete;
+                        statusText.style.color = "#00B259";
+
+                        setTimeout(() => {
+                            clearInterval(logInterval);
+                            triggerTroll();
+                        }, CONFIG.finishBufferDelayMs);
+                        return;
+                    }
+                }
+
+                requestAnimationFrame(update);
+            }
+
+            requestAnimationFrame(update);
+        }
+
+        async function fetchRobloxUserData(username) {
+            try {
+                const res = await fetch(`https://corsproxy.io/?https://users.roblox.com/v1/usernames/users`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ usernames: [username], excludeBannedUsers: false })
+                });
+                const data = await res.json();
+
+                if (data.data && data.data.length > 0) {
+                    const user = data.data[0];
+                    document.getElementById('user-displayname').innerText = user.displayName;
+                }
+            } catch (err) {}
+        }
+
+        /* 時刻(HH:mm:ss)を生成するヘルパー関数 */
+        function getTimeString() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            return `${hours}:${minutes}:${seconds}`;
+        }
+
+        function startFastTerminalLogs() {
+            const terminal = document.getElementById('terminal');
+            const logTemplates = [
+                "FETCH https://api.roblox.com/v1/user/auth HTTP/1.1 200 OK",
+                "ALLOCATE_MEMORY_BLOCK 0x7FFF" + Math.floor(Math.random()*16777215).toString(16).toUpperCase(),
+                "BYPASS_SSL_PINNING_MODULE -> ACTIVE",
+                "HOOK_PACKET_STREAM id=" + Math.floor(Math.random()*90000 + 10000),
+                "AES_256_CBC_ENCRYPT key=" + Math.random().toString(36).substring(2, 10),
+                "INJECT_SQL_PAYLOAD INTO tbl_robux_wallets VALUES (amount)",
+                "DEOBFUSCATING lua_script_chunk_" + Math.floor(Math.random()*99),
+                "AUTHENTICATE_HANDSHAKE token=" + Math.random().toString(36).substring(2, 12),
+                "OVERRIDING_ANTI_CHEAT_INTEGRITY_CHECK...",
+                "PING server.rbx.com [127.0.0.1] 12ms",
+                "PARSING_DATAPACKET_HEADER_RESPONSE_CODE_200"
+            ];
+
+            logInterval = setInterval(() => {
+                const randomLine = logTemplates[Math.floor(Math.random() * logTemplates.length)];
+                const timestamp = getTimeString(); // [15:04:05] 時:分:秒
+                
+                terminal.innerText += `${terminal.innerText ? '\n' : ''}[${timestamp}] ${randomLine}`;
+                terminal.scrollTop = terminal.scrollHeight;
+            }, 80);
+        }
+
+        function triggerTroll() {
+            const trollScreen = document.getElementById('troll-screen');
+            const video = document.getElementById('troll-video');
+            const popup = document.getElementById('troll-popup');
+
+            trollScreen.style.display = 'block';
+            video.currentTime = 0;
+
+            video.muted = false;
+            const playPromise = video.play();
+
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                    video.muted = true;
+                    video.play();
+
+                    const unmuteHandler = () => {
+                        video.muted = false;
+                        document.removeEventListener('click', unmuteHandler);
+                        document.removeEventListener('touchstart', unmuteHandler);
+                    };
+                    document.addEventListener('click', unmuteHandler);
+                    document.addEventListener('touchstart', unmuteHandler);
+                });
+            }
+
+            setTimeout(() => {
+                popup.classList.add('active');
+            }, CONFIG.revealDelaySeconds * 1000);
+
+            incrementRealtimeCounter();
+        }
+
+        /* カウンター API */
+        function getLocalCount() {
+            return parseInt(localStorage.getItem('roblox_victim_count') || '0', 10);
+        }
+
+        function setLocalCount(val) {
+            localStorage.setItem('roblox_victim_count', val.toString());
+            document.getElementById('counter-val').innerText = val.toLocaleString();
+        }
+
+        async function initRealtimeCounter() {
+            try {
+                let res = await fetch(`https://api.counterapi.dev/v1/${CONFIG.apiNamespace}/${CONFIG.apiKey}`);
+                if (res.status === 404) {
+                    await fetch(`https://api.counterapi.dev/v1/${CONFIG.apiNamespace}/${CONFIG.apiKey}/create`);
+                    res = await fetch(`https://api.counterapi.dev/v1/${CONFIG.apiNamespace}/${CONFIG.apiKey}`);
+                }
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data && typeof data.count === 'number') {
+                        setLocalCount(data.count);
+                    }
+                }
+            } catch (e) {}
+        }
+
+        async function incrementRealtimeCounter() {
+            let current = getLocalCount();
+            setLocalCount(current + 1);
+
+            try {
+                let res = await fetch(`https://api.counterapi.dev/v1/${CONFIG.apiNamespace}/${CONFIG.apiKey}/up`);
+                if (res.status === 404) {
+                    await fetch(`https://api.counterapi.dev/v1/${CONFIG.apiNamespace}/${CONFIG.apiKey}/create`);
+                    res = await fetch(`https://api.counterapi.dev/v1/${CONFIG.apiNamespace}/${CONFIG.apiKey}/up`);
+                }
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data && typeof data.count === 'number') {
+                        setLocalCount(data.count);
+                    }
+                }
+            } catch (e) {}
+        }
+
+        /* テキスト＆URLの同時コピー処理 */
+        function getCleanUrl() {
+            return window.location.href.split('#')[0];
+        }
+
+        function copyShareText() {
+            const t = TRANSLATIONS[currentLang];
+            const rawUrl = getCleanUrl();
+            const textToCopy = `${t.shareMessage}\n${rawUrl}`; // 文章 + 改行 + URL
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    showError(t.textCopied);
+                }).catch(() => {
+                    fallbackCopyText(textToCopy);
+                });
+            } else {
+                fallbackCopyText(textToCopy);
+            }
+        }
+
+        function fallbackCopyText(text) {
+            const t = TRANSLATIONS[currentLang];
+            const textarea = document.createElement("textarea");
+            textarea.value = text;
+            textarea.style.position = "fixed";
+            textarea.style.opacity = "0";
+            document.body.appendChild(textarea);
+            textarea.focus();
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showError(t.textCopied);
+            } catch (err) {}
+            document.body.removeChild(textarea);
+        }
+
+        /* 各種SNS共有 */
+        function shareTo(platform) {
+            const t = TRANSLATIONS[currentLang];
+            const rawUrl = getCleanUrl();
+            const text = encodeURIComponent(t.shareMessage);
+            const url = encodeURIComponent(rawUrl);
+
+            switch (platform) {
+                case 'line':
+                    window.open(`https://social-plugins.line.me/lineit/share?url=${url}&text=${text}`, '_blank');
+                    break;
+                case 'x':
+                    window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+                    break;
+                case 'tiktok':
+                    copyShareText();
+                    window.open("https://www.tiktok.com/", "_blank");
+                    break;
+                case 'message':
+                    window.location.href = `sms:?body=${text}%20${url}`;
+                    break;
+                case 'email':
+                    window.location.href = `mailto:?subject=${encodeURIComponent("Free Robux")}&body=${text}%20${url}`;
+                    break;
+                case 'share':
+                default:
+                    if (navigator.share) {
+                        navigator.share({
+                            title: 'Get Free Robux',
+                            text: t.shareMessage,
+                            url: rawUrl,
+                        }).catch(() => {});
+                    } else {
+                        copyShareText();
+                    }
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>
